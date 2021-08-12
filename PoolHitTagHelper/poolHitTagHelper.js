@@ -201,25 +201,31 @@ function poolHitTagHelper()
     for (let i = 0; i < count; i++)
     {
         var output = ctl.ExecuteCommand("kn");
+        var printRequired = false;
 
         if (isDeallocation() === true)
         {
             printAdditionalDeallocationInformation();
+            printRequired = True;
         }
 
         if (isAllocation() === true)
         {
             printAdditionalAllocationInformation();
+            printRequired = True;
         }
 
-        diag.debugLog("+\n");
-
-        for (var line of output)
+        if (true === printRequired)
         {
-            diag.debugLog(" ", line, "\n");
-        }
+            diag.debugLog("+\n");
 
-        diag.debugLog("---------------------------------\n");
+            for (var line of output)
+            {
+                diag.debugLog(" ", line, "\n");
+            }
+
+            diag.debugLog("---------------------------------\n");
+        }
 
         ctl.ExecuteCommand("g");
     }
