@@ -128,7 +128,7 @@ function printAdditionalAllocationInformation()
     diag.debugLog("<<\n");
 }
 
-function printAdditionalDealocationInformation()
+function printAdditionalDeallocationInformation()
 {
     var diag = host.diagnostics;
     var ctl = host.namespace.Debugger.Utility.Control;
@@ -204,7 +204,7 @@ function poolHitTagHelper()
 
         if (isDeallocation() === true)
         {
-            printAdditionalDealocationInformation();
+            printAdditionalDeallocationInformation();
         }
 
         if (isAllocation() === true)
