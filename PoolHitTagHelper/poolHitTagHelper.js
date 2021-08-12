@@ -172,8 +172,8 @@ function printAdditionalDeallocationInformation()
 function poolHitTagHelper()
 {
     // TODO: Modify the ta and the count
-    var tag = "FMfn";   
-    var count = 5;
+    var tag = "Toke";   
+    var count = 400;
     var logfile = "c:\\support\\logfile.log";
 
     var ctl = host.namespace.Debugger.Utility.Control;
@@ -205,26 +205,26 @@ function poolHitTagHelper()
         if (isDeallocation() === true)
         {
             printAdditionalDeallocationInformation();
-            printRequired = True;
         }
-
-        if (isAllocation() === true)
+        else
         {
-            printAdditionalAllocationInformation();
-            printRequired = True;
-        }
-
-        if (true === printRequired)
-        {
+            // isAllocation will change the stack, so we need
+            // to save it first
             var output = ctl.ExecuteCommand("kn");
-            diag.debugLog("+\n");
 
-            for (var line of output)
+            if (isAllocation() === true)
             {
-                diag.debugLog(" ", line, "\n");
-            }
+                printAdditionalAllocationInformation();
 
-            diag.debugLog("---------------------------------\n");
+                diag.debugLog("+\n");
+
+                for (var line of output)
+                {
+                    diag.debugLog(" ", line, "\n");
+                }
+
+                diag.debugLog("---------------------------------\n");
+            }
         }
 
         ctl.ExecuteCommand("g");
