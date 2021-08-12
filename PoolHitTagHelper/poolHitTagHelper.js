@@ -121,7 +121,7 @@ function printAdditionalAllocationInformation()
     var op = ctl.ExecuteCommand("r rax");
     for (var line of op)
     {
-        diag.debugLog(line, "\n");
+        diag.debugLog("-> ", line, "\n");
     }
 }
 
@@ -213,8 +213,6 @@ function poolHitTagHelper()
 
     for (let i = 0; i < count; i++)
     {
-        var printRequired = false;
-
         if (isDeallocation() === true)
         {
             diag.debugLog("\n>>");
@@ -235,14 +233,13 @@ function poolHitTagHelper()
                 printProcessName();
                 printAdditionalAllocationInformation();
 
-                diag.debugLog("+\n");
-
+                diag.debugLog("{{\n");
                 for (var line of output)
                 {
                     diag.debugLog(" ", line, "\n");
                 }
+                diag.debugLog("}}\n");
 
-                diag.debugLog("---------------------------------\n");
                 diag.debugLog("<<\n");
             }
         }
