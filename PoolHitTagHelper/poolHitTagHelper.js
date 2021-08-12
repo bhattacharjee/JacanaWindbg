@@ -121,7 +121,7 @@ function printAdditionalAllocationInformation()
     var op = ctl.ExecuteCommand("r rax");
     for (var line of op)
     {
-        diag.debugLog("-> ", line, "\n");
+        diag.debugLog("-> ", line.trim().replace('=', ' '), "\n");
     }
 }
 
@@ -134,11 +134,11 @@ function printProcessName()
     {
         if (line.indexOf("Image:") !== -1)
         {
-            diag.debugLog("-> ", line, "\n");
+            diag.debugLog("-> ", line.trim(), "\n");
         }
         if (line.startsWith("PROCESS"))
         {
-            diag.debugLog("-> ", line, "\n");
+            diag.debugLog("-> ", line.trim(), "\n");
         }
     }
 
