@@ -217,6 +217,7 @@ function poolHitTagHelper()
         {
             diag.debugLog("\n>>");
             diag.debugLog("free\n");
+            printProcessName();
             printAdditionalDeallocationInformation();
             diag.debugLog("<<\n");
         }
