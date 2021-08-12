@@ -200,7 +200,6 @@ function poolHitTagHelper()
 
     for (let i = 0; i < count; i++)
     {
-        var output = ctl.ExecuteCommand("kn");
         var printRequired = false;
 
         if (isDeallocation() === true)
@@ -217,6 +216,7 @@ function poolHitTagHelper()
 
         if (true === printRequired)
         {
+            var output = ctl.ExecuteCommand("kn");
             diag.debugLog("+\n");
 
             for (var line of output)
