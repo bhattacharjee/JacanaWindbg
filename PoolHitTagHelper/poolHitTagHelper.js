@@ -114,8 +114,6 @@ function printAdditionalAllocationInformation()
 {
     var diag = host.diagnostics;
     var ctl = host.namespace.Debugger.Utility.Control;
-    diag.debugLog(">>");
-    diag.debugLog("malloc\n");
     while (isAllocation() === true)
     {
         ctl.ExecuteCommand("gu");
@@ -125,7 +123,25 @@ function printAdditionalAllocationInformation()
     {
         diag.debugLog(line, "\n");
     }
-    diag.debugLog("<<\n");
+}
+
+function printProcessName()
+{
+    var diag = host.diagnostics;
+    var ctl = host.namespace.Debugger.Utility.Control;
+    var output = ctl.ExecuteCommand("!process -1 0");
+    for (var line of output)
+    {
+        if (line.indexOf("Image:") !== -1)
+        {
+            diag.debugLog("-> ", line, "\n");
+        }
+        if (line.startsWith("PROCESS"))
+        {
+            diag.debugLog("-> ", line, "\n");
+        }
+    }
+
 }
 
 function printAdditionalDeallocationInformation()
@@ -134,8 +150,6 @@ function printAdditionalDeallocationInformation()
     var ctl = host.namespace.Debugger.Utility.Control;
     var interesting = false;
 
-    diag.debugLog(">>");
-    diag.debugLog("free\n");
     output = ctl.ExecuteCommand("!stack -p");
 
     for (var line of output)
@@ -166,14 +180,13 @@ function printAdditionalDeallocationInformation()
             }
         }
     }
-    diag.debugLog("<<\n");
 }
 
 function poolHitTagHelper()
 {
     // TODO: Modify the ta and the count
     var tag = "Toke";   
-    var count = 400;
+    var count = 40;
     var logfile = "c:\\support\\logfile.log";
 
     var ctl = host.namespace.Debugger.Utility.Control;
@@ -204,7 +217,10 @@ function poolHitTagHelper()
 
         if (isDeallocation() === true)
         {
+            diag.debugLog("\n>>");
+            diag.debugLog("free\n");
             printAdditionalDeallocationInformation();
+            diag.debugLog("<<\n");
         }
         else
         {
@@ -214,6 +230,9 @@ function poolHitTagHelper()
 
             if (isAllocation() === true)
             {
+                diag.debugLog("\n>>");
+                diag.debugLog("malloc\n");
+                printProcessName();
                 printAdditionalAllocationInformation();
 
                 diag.debugLog("+\n");
@@ -224,6 +243,7 @@ function poolHitTagHelper()
                 }
 
                 diag.debugLog("---------------------------------\n");
+                diag.debugLog("<<\n");
             }
         }
 
