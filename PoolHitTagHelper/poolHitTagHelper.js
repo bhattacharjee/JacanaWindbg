@@ -209,7 +209,7 @@ function poolHitTagHelper()
 
     diag.debugLog("**************************************\n\n");
     diag.debugLog("---------------------------------\n");
-    diag.debugLog("g");
+    ctl.ExecuteCommand("g");
 
     for (let i = 0; i < count; i++)
     {
