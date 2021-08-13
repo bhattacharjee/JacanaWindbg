@@ -246,6 +246,7 @@ function poolHitTagHelper()
     }
     diag.debugLog("======================================\n\n");
 
-    ctl.ExecuteCommand(".logclose")
+    ctl.ExecuteCommand(".logclose");
+    diag.debugLog("Finished. Output logged into " + logfile);
 }
 
