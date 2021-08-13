@@ -223,12 +223,9 @@ function poolHitTagHelper()
         }
         else
         {
-            // isAllocation will change the stack, so we need
-            // to save it first
-            var output = ctl.ExecuteCommand("kn");
-
             if (isAllocation() === true)
             {
+                var output = ctl.ExecuteCommand("kn");
                 diag.debugLog("\n>>");
                 diag.debugLog("malloc\n");
                 printProcessName();
