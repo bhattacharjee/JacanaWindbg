@@ -247,6 +247,7 @@ function poolHitTagHelper()
     diag.debugLog("======================================\n\n");
 
     ctl.ExecuteCommand(".logclose");
+    ctl.ExecuteCommand("ed nt!PoolHitTag 0");
     diag.debugLog("Finished. Output logged into " + logfile);
 }
 
